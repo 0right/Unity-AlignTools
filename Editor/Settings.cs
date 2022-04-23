@@ -56,11 +56,10 @@ namespace litefeel.AlignTools
             }
         }
 
-        public static bool _AlignToLastSelectction;
+        private static bool _AlignToLastSelectction;
         public static bool AlignToLastSelectction
         {
             get { return _AlignToLastSelectction; }
-
             set
             {
                 if (value != _AlignToLastSelectction)
@@ -70,7 +69,6 @@ namespace litefeel.AlignTools
                 }
             }
         }
-
 
         private static bool _ShowRuler;
         public static bool ShowRuler

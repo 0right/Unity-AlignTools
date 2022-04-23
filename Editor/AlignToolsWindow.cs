@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -5,7 +6,6 @@ namespace litefeel.AlignTools
 {
     public class AlignToolsWindow : EditorWindow
     {
-
         const int AXIS_X = 0;
         const int AXIS_Y = 1;
         const int AXIS_Z = 2;
@@ -14,6 +14,20 @@ namespace litefeel.AlignTools
         private string[] _modesStr = new string[] { "NGUI", "UGUI", "World" };
 
         private bool needPepaintScene = false;
+
+        Transform[] lastSelectedArr;
+        public static Transform lastSelectedTrans;
+
+        private void OnSelectionChange()
+        {
+            if(lastSelectedArr == null)
+                lastSelectedArr = new Transform[] { };
+            var newSelected = Selection.transforms.Except(lastSelectedArr).ToList();
+            lastSelectedArr = Selection.transforms;
+            if (newSelected == null || newSelected.Count() == 0)
+                return;
+            lastSelectedTrans = newSelected.First();
+        }
 
         // Update the editor window when user changes something (mainly useful when selecting objects)
         void OnInspectorUpdate()

@@ -7,7 +7,7 @@ namespace litefeel.AlignTools
 {
     internal static class Utils
     {
-        internal static string editorPath = "Assets/AlignTool/Editor";
+        internal static string editorPath = "Assets/Unity-AlignTools/Editor";
 
         internal static Texture LoadTexture(string textureName)
         {
@@ -64,11 +64,12 @@ namespace litefeel.AlignTools
         // 获取最后所选的Widget
         public static UIWidget GetLastSelectedTrans(IEnumerable<UIWidget> list)
         {
+            var lastSelected = AlignToolsWindow.lastSelectedTrans;
+            if (lastSelected == null)
+                return list.First();
             foreach (var widget in list)
             {
-
-                // tricks，Selection.transforms是无序的，但是显示在Inspector面板的肯定是最后选中的
-                if (widget.transform == Selection.activeTransform)
+                if (widget.transform == lastSelected)
                 {
                     return widget;
                 }

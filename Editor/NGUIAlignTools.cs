@@ -123,7 +123,7 @@ namespace litefeel.AlignTools
                 widget.transform.position = pos;
             }
         }
-
+        
         private static void ExpandUI(int axis, CalcSize calcSize, ApplyValue applyValue)
         {
             var list = Utils.GetNGUIWidgets();
