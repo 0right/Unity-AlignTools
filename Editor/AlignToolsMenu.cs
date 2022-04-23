@@ -5,8 +5,8 @@ namespace litefeel.AlignTools
 {
     public static class AlignToolsMenu
     {
-        //private const string KeyboardMenuPath = "Window/LiteFeel/Align Tools/Adjust Position By Keyboard %#K";
-        private const string WindowMenuPath = "Window/LiteFeel/Align Tools";
+        private const string KeyboardMenuPath = "Window/LiteFeel/Align Tools/Adjust Position By Keyboard %#K";
+        private const string WindowMenuPath = "Window/LiteFeel/Align Tools/Align Tool";
 
         // Creation of window
         [MenuItem(WindowMenuPath, false)]
@@ -17,17 +17,17 @@ namespace litefeel.AlignTools
             window.autoRepaintOnSceneChange = true;
         }
 
-        //[MenuItem(KeyboardMenuPath, true)]
-        //private static bool VaildToggleKeyboard()
-        //{
-        //    Menu.SetChecked(KeyboardMenuPath, Settings.AdjustPositionByKeyboard);
-        //    return true;
-        //}
-        //[MenuItem(KeyboardMenuPath)]
-        //private static void ToggleKeyboard()
-        //{
-        //    Settings.AdjustPositionByKeyboard = !Menu.GetChecked(KeyboardMenuPath);
-        //}
+        [MenuItem(KeyboardMenuPath, true)]
+        private static bool VaildToggleKeyboard()
+        {
+            Menu.SetChecked(KeyboardMenuPath, Settings.AdjustPositionByKeyboard);
+            return true;
+        }
+        [MenuItem(KeyboardMenuPath)]
+        private static void ToggleKeyboard()
+        {
+            Settings.AdjustPositionByKeyboard = !Menu.GetChecked(KeyboardMenuPath);
+        }
     }
 }
 

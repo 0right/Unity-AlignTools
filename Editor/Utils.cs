@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -48,7 +49,7 @@ namespace litefeel.AlignTools
 
         public static List<UIWidget> GetNGUIWidgets()
         {
-            var arr = Selection.gameObjects;
+            var arr = Selection.transforms;
             var list = new List<UIWidget>();
             foreach (var trans in arr)
             {
@@ -58,6 +59,21 @@ namespace litefeel.AlignTools
                 list.Add(widget);
             }
             return list;
+        }
+
+        // 获取最后所选的Widget
+        public static UIWidget GetLastSelectedTrans(IEnumerable<UIWidget> list)
+        {
+            foreach (var widget in list)
+            {
+
+                // tricks，Selection.transforms是无序的，但是显示在Inspector面板的肯定是最后选中的
+                if (widget.transform == Selection.activeTransform)
+                {
+                    return widget;
+                }
+            }
+            return list.First();
         }
 
         internal static void WorldCorners(this RectTransform rt, Vector3[] corners)

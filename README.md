@@ -1,84 +1,28 @@
 # Align Tools
 
+[AlignTools] 是一个在Unity中使用的对齐工具，支持UGUI、NGUI以及任意场景中的GameObject，并包含简单的UI标尺功能
 
-[![Test](https://github.com/litefeel/Unity-AlignTools/workflows/Test/badge.svg)](https://github.com/litefeel/Unity-AlignTools/actions)
-[![](https://img.shields.io/github/release/litefeel/Unity-AlignTools.svg?label=latest%20version)](https://github.com/litefeel/Unity-AlignTools/releases)
-[![](https://img.shields.io/github/license/litefeel/Unity-AlignTools.svg)](https://github.com/litefeel/Unity-AlignTools/blob/upm/LICENSE.md)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/litefeel)
-
-[Align Tools][AlignTools] is just perfect Unity asset plugin to align game object.  
-
-## Feature list
-
-- Free
-- Align game object
-- Distribute GUI object
-- Tested with Unity 2019 and 2020
-- No runtime resources required
-- No scripting required
-
-## Install
-
-#### By NPM (Ease upgrade in Package Manager UI)**Recommend**
-
-Find the manifest.json file in the Packages folder of your project and edit it to look like this:
-``` js
-{
-  "scopedRegistries": [
-    {
-      "name": "My Registry",
-      "url": "https://registry.npmjs.org",
-      "scopes": [
-        "com.litefeel"
-      ]
-    }
-  ],
-  "dependencies": {
-    "com.litefeel.aligntools": "1.8.0",
-    ...
-  }
-}
-```
-
-#### By git url
-
-Find the manifest.json file in the Packages folder of your project and edit it to look like this:
-``` js
-{
-  "dependencies": {
-    "com.litefeel.aligntools": "https://github.com/litefeel/Unity-AlignTools.git#1.8.0",
-    ...
-  }
-}
-```
-
-#### Using .zip file (for Unity 5.0+)
-
-1. Download `Source code` from [Releases](https://github.com/litefeel/Unity-AlignTools/releases)
-2. Extract the package into  `$UnityProject/Packages` or `$UnityProject/Assets/Plugins`
-
-
-#### How to use?
-
-1. Open Windows from [Windows] > [LiteFeel] > [Align Tools] > [Align Tools]
-2. Select two or more GUI object
-3. Align them
-
-#### Adjust position by keyboard
-
-1. Toggle on Menu item `Adjust Position By Keyboard` at `Window/LiteFeel/Align Tools/Align Tools`
-2. Select one or more ui object
-3. Press the arrow keys (Options Press Ctrl)
-
-#### Screenshots
+## Screenshots
 
 ![](Documentation~/Images/screenshots.png)
 
-## Support
+## 说明
+此版本与主干版本相比，仅多出NGUI支持。如不需要NGUI支持，建议使用[主干版本]
+### 使用方法
 
-- Create issues by [issues][issues] page
-- Send email to me: <litefeel@gmail.com>
+1. 工具打开路径： [Window] > [LiteFeel] > [Align Tools] > [Align Tool]
+2. 选择多个UI/GameObject
+3. 点击所需的对齐按钮
+
+### 额外添加的特性
+#### 与指定NGUI widget对齐
+* 取消勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最边缘的UI
+![](Documentation~/Images/TurnOff.gif)
+
+* 勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最后选中的UI
+![](Documentation~/Images/TurnOn.gif)
 
 
-[AlignTools]: https://github.com/litefeel/Unity-AlignTools (AlignTools)
-[issues]: https://github.com/litefeel/Unity-AlignTools/issues (AlignTools issues)
+[AlignTools]: https://github.com/0right/Unity-AlignTools
+[主干版本]: https://github.com/litefeel/Unity-AlignTools
+

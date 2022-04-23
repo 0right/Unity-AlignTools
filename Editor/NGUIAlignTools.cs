@@ -66,7 +66,8 @@ namespace litefeel.AlignTools
 
             if (Settings.AlignToLastSelectction)
             {
-                var pos = list.Last().worldCenter;
+                var lastSelectedWidget = Utils.GetLastSelectedTrans(list);
+                var pos = lastSelectedWidget.worldCenter;
                 minV = pos[axis];
                 maxV = minV;
             }
@@ -165,7 +166,8 @@ namespace litefeel.AlignTools
         {
             if (Settings.AlignToLastSelectction)
             {
-                return widgets.Last().worldCorners[0][axis];
+                var lastSelectedWidget = Utils.GetLastSelectedTrans(widgets);
+                return lastSelectedWidget.worldCorners[0][axis];
             }
 
             float v = 0f;
@@ -185,7 +187,8 @@ namespace litefeel.AlignTools
         {
             if (Settings.AlignToLastSelectction)
             {
-                return widgets.Last().worldCorners[2][axis];
+                var lastSelectedWidget = Utils.GetLastSelectedTrans(widgets);
+                return lastSelectedWidget.worldCorners[2][axis];
             }
 
             float v = 0f;
