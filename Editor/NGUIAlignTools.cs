@@ -83,7 +83,7 @@ namespace litefeel.AlignTools
             foreach (var widget in list)
             {
                 var pos = applyValue(axis, widget, v);
-                Undo.RecordObject(widget, "Align Center UI");
+                Undo.RecordObject(widget.transform, "Align Center UI");
                 widget.transform.position = pos;
             }
         }
@@ -119,7 +119,7 @@ namespace litefeel.AlignTools
             {
                 var widget = vlist[i].widget;
                 var pos = applyValue(axis, widget, minV + gap * i);
-                Undo.RecordObject(widget, "Distribution UI");
+                Undo.RecordObject(widget.transform, "Distribution UI");
                 widget.transform.position = pos;
             }
         }
@@ -152,10 +152,10 @@ namespace litefeel.AlignTools
                 float _minV, _maxV;
                 size = Mathf.Min(size, calcSize(axis, list[i].localCorners, out _minV, out _maxV));
             }
-            foreach (var rt in list)
+            foreach (var widget in list)
             {
-                Undo.RecordObject(rt, "Expand or Shark UI");
-                applyValue(axis, rt, size);
+                Undo.RecordObject(widget, "Expand or Shark UI");
+                applyValue(axis, widget, size);
             }
         }
         #endregion
