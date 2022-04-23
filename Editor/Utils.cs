@@ -6,7 +6,7 @@ namespace litefeel.AlignTools
 {
     internal static class Utils
     {
-        internal static string editorPath = "Assets/Plugins/LiteFeel/AlignTools/Editor";
+        internal static string editorPath = "Assets/AlignTool/Editor";
 
         internal static Texture LoadTexture(string textureName)
         {
@@ -42,6 +42,20 @@ namespace litefeel.AlignTools
                 var rt = trans as RectTransform;
                 if (rt) continue;
                 list.Add(trans);
+            }
+            return list;
+        }
+
+        public static List<UIWidget> GetNGUIWidgets()
+        {
+            var arr = Selection.transforms;
+            var list = new List<UIWidget>();
+            foreach (var trans in arr)
+            {
+                var widget = trans.GetComponent<UIWidget>();
+                if (widget == null)
+                    continue;
+                list.Add(widget);
             }
             return list;
         }

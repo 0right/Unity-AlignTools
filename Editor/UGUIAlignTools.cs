@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace litefeel.AlignTools
 {
-    public class AlignTools
+    public class UGUIAlignTools
     {
         delegate void CalcValueOne(int axis, Vector3[] corners, bool isFirst, ref float v);
         delegate float CalcValueTwo(int axis, Vector3[] corners, bool isFirst, ref float minV, ref float maxV);
@@ -270,7 +270,10 @@ namespace litefeel.AlignTools
         {
             var v = (corners[0][axis] + corners[2][axis]) * 0.5f;
             if (isFirst)
-                minV = maxV = v;
+            {
+                minV = v;
+                maxV = v;
+            }
             else
             {
                 minV = Mathf.Min(minV, v);

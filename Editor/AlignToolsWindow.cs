@@ -11,7 +11,7 @@ namespace litefeel.AlignTools
         const int AXIS_Z = 2;
 
         private Ruler _ruler;
-        private string[] _modesStr = new string[] { "UGUI", "World" };
+        private string[] _modesStr = new string[] { "NGUI", "UGUI", "World" };
 
         private bool needPepaintScene = false;
 
@@ -30,6 +30,9 @@ namespace litefeel.AlignTools
 
             switch (Settings.OperatorMode)
             {
+                case OperatorMode.NGUI:
+                    ShowNGUIMode();
+                    break;
                 case OperatorMode.UGUI:
                     ShowUGUIMode();
                     break;
@@ -41,36 +44,36 @@ namespace litefeel.AlignTools
             if (needPepaintScene)
                 SceneView.RepaintAll();
         }
-        
+
         private void ShowUGUIMode()
         {
             EditorGUILayout.BeginHorizontal();
-            DrawButton("align_left", AlignTools.AlignToMin, AXIS_X, "Align Left");
-            DrawButton("align_center_h", AlignTools.AlignToCenter, AXIS_X, "Align Center by Horizontal");
-            DrawButton("align_right", AlignTools.AlignToMax, AXIS_X, "Align Right");
+            DrawButton("align_left", UGUIAlignTools.AlignToMin, AXIS_X, "Align Left");
+            DrawButton("align_center_h", UGUIAlignTools.AlignToCenter, AXIS_X, "Align Center by Horizontal");
+            DrawButton("align_right", UGUIAlignTools.AlignToMax, AXIS_X, "Align Right");
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("align_top", AlignTools.AlignToMax, AXIS_Y, "Align Top");
-            DrawButton("align_center_v", AlignTools.AlignToCenter, AXIS_Y, "Align Center by Vertical");
-            DrawButton("align_bottom", AlignTools.AlignToMin, AXIS_Y, "Align Bottom");
+            DrawButton("align_top", UGUIAlignTools.AlignToMax, AXIS_Y, "Align Top");
+            DrawButton("align_center_v", UGUIAlignTools.AlignToCenter, AXIS_Y, "Align Center by Vertical");
+            DrawButton("align_bottom", UGUIAlignTools.AlignToMin, AXIS_Y, "Align Bottom");
             EditorGUILayout.EndHorizontal();
 
             DrawLine();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("distribution_h", AlignTools.DistributionGap, AXIS_X, "Distribute by Horizontal");
-            DrawButton("distribution_v", AlignTools.DistributionGap, AXIS_Y, "Distribute by Vertical");
+            DrawButton("distribution_h", UGUIAlignTools.DistributionGap, AXIS_X, "Distribute by Horizontal");
+            DrawButton("distribution_v", UGUIAlignTools.DistributionGap, AXIS_Y, "Distribute by Vertical");
             EditorGUILayout.LabelField("Order By", GUILayout.Width(60), GUILayout.ExpandWidth(false));
             Settings.DistributionOrder = (DistributionOrder)EditorGUILayout.EnumPopup(Settings.DistributionOrder);
             EditorGUILayout.EndHorizontal();
 
             DrawLine();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("expand_h", AlignTools.Expand, AXIS_X, "Expand Size by Horizontal");
-            DrawButton("expand_v", AlignTools.Expand, AXIS_Y, "Expand Size by Vertical");
+            DrawButton("expand_h", UGUIAlignTools.Expand, AXIS_X, "Expand Size by Horizontal");
+            DrawButton("expand_v", UGUIAlignTools.Expand, AXIS_Y, "Expand Size by Vertical");
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("shrink_h", AlignTools.Shrink, AXIS_X, "Shrink Size by Horizontal");
-            DrawButton("shrink_v", AlignTools.Expand, AXIS_Y, "Shrink Size by Vertical");
+            DrawButton("shrink_h", UGUIAlignTools.Shrink, AXIS_X, "Shrink Size by Horizontal");
+            DrawButton("shrink_v", UGUIAlignTools.Expand, AXIS_Y, "Shrink Size by Vertical");
             EditorGUILayout.EndHorizontal();
 
 
@@ -89,29 +92,76 @@ namespace litefeel.AlignTools
                 needPepaintScene |= EditorGUI.EndChangeCheck();
             }
         }
-        private void ShowWorldMode()
+        private void ShowNGUIMode()
         {
             EditorGUILayout.BeginHorizontal();
-            DrawButton("align_left", AlignToolsWorld.AlignToMin, AXIS_X, "Align Min by Axis X");
-            DrawButton("align_center_h", AlignToolsWorld.AlignToCenter, AXIS_X, "Align Center by Axis X");
-            DrawButton("align_right", AlignToolsWorld.AlignToMax, AXIS_X, "Align Max by Axis X");
+            DrawButton("align_left", NGUIAlignTools.AlignToMin, AXIS_X, "Align Min by Axis X");
+            DrawButton("align_center_h", NGUIAlignTools.AlignToCenter, AXIS_X, "Align Center by Axis X");
+            DrawButton("align_right", NGUIAlignTools.AlignToMax, AXIS_X, "Align Max by Axis X");
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("align_top", AlignToolsWorld.AlignToMax, AXIS_Y, "Align Min by Axis Y");
-            DrawButton("align_center_v", AlignToolsWorld.AlignToCenter, AXIS_Y, "Align Center by Axis Y");
-            DrawButton("align_bottom", AlignToolsWorld.AlignToMin, AXIS_Y, "Align Max by Axis Y");
+            DrawButton("align_top", NGUIAlignTools.AlignToMax, AXIS_Y, "Align Max by Axis Y");
+            DrawButton("align_center_v", NGUIAlignTools.AlignToCenter, AXIS_Y, "Align Center by Axis Y");
+            DrawButton("align_bottom", NGUIAlignTools.AlignToMin, AXIS_Y, "Align Min by Axis Y");
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("align_max_z", AlignToolsWorld.AlignToMax, AXIS_Z, "Align Min by Axis Z");
-            DrawButton("align_center_z", AlignToolsWorld.AlignToCenter, AXIS_Z, "Align Center by Axis Z");
-            DrawButton("align_min_z", AlignToolsWorld.AlignToMin, AXIS_Z, "Align Max by Axis Z");
+            Settings.AlignToLastSelectction = EditorGUILayout.ToggleLeft("Align To Last Selectction", Settings.AlignToLastSelectction);
             EditorGUILayout.EndHorizontal();
 
             DrawLine();
             EditorGUILayout.BeginHorizontal();
-            DrawButton("distribution_h", AlignToolsWorld.Distribution, AXIS_X, "Distribute by Axis X");
-            DrawButton("distribution_v", AlignToolsWorld.Distribution, AXIS_Y, "Distribute by Axis Y");
-            DrawButton("distribution_z", AlignToolsWorld.Distribution, AXIS_Z, "Distribute by Axis Z");
+            DrawButton("distribution_h", NGUIAlignTools.Distribution, AXIS_X, "Distribute by Axis X");
+            DrawButton("distribution_v", NGUIAlignTools.Distribution, AXIS_Y, "Distribute by Axis Y");
+            EditorGUILayout.EndHorizontal();
+
+            DrawLine();
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("expand_h", NGUIAlignTools.Expand, AXIS_X, "Expand Size by Horizontal");
+            DrawButton("expand_v", NGUIAlignTools.Expand, AXIS_Y, "Expand Size by Vertical");
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("shrink_h", NGUIAlignTools.Shrink, AXIS_X, "Shrink Size by Horizontal");
+            DrawButton("shrink_v", NGUIAlignTools.Shrink, AXIS_Y, "Shrink Size by Vertical");
+            EditorGUILayout.EndHorizontal();
+
+            DrawLine();
+
+            if (null == _ruler) _ruler = new Ruler();
+            EditorGUI.BeginChangeCheck();
+            Settings.ShowRuler = EditorGUILayout.ToggleLeft("Show Ruler", Settings.ShowRuler);
+            needPepaintScene |= EditorGUI.EndChangeCheck();
+
+            if (Settings.ShowRuler)
+            {
+                EditorGUI.BeginChangeCheck();
+                Settings.RulerLineColor = EditorGUILayout.ColorField("Ruler Line Color", Settings.RulerLineColor);
+                needPepaintScene |= EditorGUI.EndChangeCheck();
+            }
+        }
+
+        private void ShowWorldMode()
+        {
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("align_left", WorldAlignTools.AlignToMin, AXIS_X, "Align Min by Axis X");
+            DrawButton("align_center_h", WorldAlignTools.AlignToCenter, AXIS_X, "Align Center by Axis X");
+            DrawButton("align_right", WorldAlignTools.AlignToMax, AXIS_X, "Align Max by Axis X");
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("align_top", WorldAlignTools.AlignToMax, AXIS_Y, "Align Min by Axis Y");
+            DrawButton("align_center_v", WorldAlignTools.AlignToCenter, AXIS_Y, "Align Center by Axis Y");
+            DrawButton("align_bottom", WorldAlignTools.AlignToMin, AXIS_Y, "Align Max by Axis Y");
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("align_max_z", WorldAlignTools.AlignToMax, AXIS_Z, "Align Min by Axis Z");
+            DrawButton("align_center_z", WorldAlignTools.AlignToCenter, AXIS_Z, "Align Center by Axis Z");
+            DrawButton("align_min_z", WorldAlignTools.AlignToMin, AXIS_Z, "Align Max by Axis Z");
+            EditorGUILayout.EndHorizontal();
+
+            DrawLine();
+            EditorGUILayout.BeginHorizontal();
+            DrawButton("distribution_h", WorldAlignTools.Distribution, AXIS_X, "Distribute by Axis X");
+            DrawButton("distribution_v", WorldAlignTools.Distribution, AXIS_Y, "Distribute by Axis Y");
+            DrawButton("distribution_z", WorldAlignTools.Distribution, AXIS_Z, "Distribute by Axis Z");
             EditorGUILayout.LabelField("Order By", GUILayout.Width(60), GUILayout.ExpandWidth(false));
             Settings.DistributionOrder = (DistributionOrder)EditorGUILayout.EnumPopup(Settings.DistributionOrder);
             EditorGUILayout.EndHorizontal();
@@ -129,6 +179,7 @@ namespace litefeel.AlignTools
             DrawLine();
             Settings.AdjustPositionByKeyboard = EditorGUILayout.ToggleLeft("Adjust Position By Keyboard", Settings.AdjustPositionByKeyboard);
         }
+
         private void DrawLine()
         {
             GUILayout.Box("", new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.Height(1) });
@@ -183,7 +234,7 @@ namespace litefeel.AlignTools
         private void OnSceneGUI(SceneView sceneView)
         {
             AdjustPosition.Execute();
-            if (_ruler != null && Settings.OperatorMode == OperatorMode.UGUI)
+            if (_ruler != null && (Settings.OperatorMode == OperatorMode.NGUI || Settings.OperatorMode == OperatorMode.UGUI))
                 _ruler.OnSceneGUI(sceneView);
         }
 

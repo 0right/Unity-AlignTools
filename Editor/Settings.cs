@@ -5,6 +5,7 @@ namespace litefeel.AlignTools
 {
     public enum OperatorMode : int
     {
+        NGUI,
         UGUI,
         World,
     }
@@ -17,11 +18,13 @@ namespace litefeel.AlignTools
     public static class Settings
     {
         private const string AdjustPositionByKeyboardKey = "litefeel.AlignTools.AdjustPositionByKeyboard";
+        private const string AlignToLastSelectctionKey = "litefeel.AlignTools.AlignToLastSelectctionKey";
+
         private const string ShowRulerKey = "litefeel.AlignTools.ShowRuler";
         private const string RulerLineColorKey = "litefeel.AlignTools.RulerLineColor";
         private const string OperatorModeKey = "litefeel.AlignTools.OperatorModeKey";
         private const string DistributionOrderKey = "litefeel.AlignTools.DistributionOrderKey";
-        
+
 
 
         [InitializeOnLoadMethod]
@@ -52,6 +55,22 @@ namespace litefeel.AlignTools
                 }
             }
         }
+
+        public static bool _AlignToLastSelectction;
+        public static bool AlignToLastSelectction
+        {
+            get { return _AlignToLastSelectction; }
+
+            set
+            {
+                if (value != _AlignToLastSelectction)
+                {
+                    _AlignToLastSelectction = value;
+                    EditorPrefs.SetBool(AlignToLastSelectctionKey, value);
+                }
+            }
+        }
+
 
         private static bool _ShowRuler;
         public static bool ShowRuler
