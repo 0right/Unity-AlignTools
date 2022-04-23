@@ -32,6 +32,7 @@ namespace litefeel.AlignTools
         {
             _AdjustPositionByKeyboard = EditorPrefs.GetBool(AdjustPositionByKeyboardKey, false);
             _ShowRuler = EditorPrefs.GetBool(ShowRulerKey, false);
+            _AlignToLastSelectction = EditorPrefs.GetBool(AlignToLastSelectctionKey, false);
 
             var ruleLineColorStr = EditorPrefs.GetString(RulerLineColorKey, null);
             var ruleLineColor = Color.white;
