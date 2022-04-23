@@ -48,7 +48,7 @@ namespace litefeel.AlignTools
 
         public static List<UIWidget> GetNGUIWidgets()
         {
-            var arr = Selection.transforms;
+            var arr = Selection.gameObjects;
             var list = new List<UIWidget>();
             foreach (var trans in arr)
             {
