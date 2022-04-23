@@ -16,12 +16,10 @@
 
 ### 额外添加的特性
 #### 与指定NGUI widget对齐
-* 取消勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最边缘的UI
+* 取消勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最边缘的UI：
 ![](Documentation~/Images/TurnOff.gif)
-
-* 勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最后选中的UI
+* 勾选勾选NGUI 页签的` Align To Last Selection `，对齐时将对齐至最后选中的UI：
 ![](Documentation~/Images/TurnOn.gif)
-
 
 [AlignTools]: https://github.com/0right/Unity-AlignTools
 [主干版本]: https://github.com/litefeel/Unity-AlignTools
