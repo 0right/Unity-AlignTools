@@ -149,6 +149,11 @@ namespace litefeel.AlignTools
             {
                 EditorGUI.BeginChangeCheck();
                 Settings.RulerLineColor = EditorGUILayout.ColorField("Ruler Line Color", Settings.RulerLineColor);
+                Settings.RulerLineWidth = EditorGUILayout.IntField("Ruler Line Width", Settings.RulerLineWidth);
+                if(GUILayout.Button("Clear All Rulers"))
+                {
+                    _ruler.ClearAllRulers();
+                }
                 needPepaintScene |= EditorGUI.EndChangeCheck();
             }
         }

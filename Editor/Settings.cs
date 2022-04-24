@@ -22,6 +22,8 @@ namespace litefeel.AlignTools
 
         private const string ShowRulerKey = "litefeel.AlignTools.ShowRuler";
         private const string RulerLineColorKey = "litefeel.AlignTools.RulerLineColor";
+        private const string RulerLineWidthKey = "litefeel.AlignTools.RulerLineWidth";
+
         private const string OperatorModeKey = "litefeel.AlignTools.OperatorModeKey";
         private const string DistributionOrderKey = "litefeel.AlignTools.DistributionOrderKey";
 
@@ -39,6 +41,7 @@ namespace litefeel.AlignTools
             if (!ColorUtility.TryParseHtmlString(ruleLineColorStr, out ruleLineColor))
                 ruleLineColor = Color.white;
             _RulerLineColor = ruleLineColor;
+            _RulerLineWidth = EditorPrefs.GetInt(RulerLineWidthKey, 0);
             _OperatorMode = (OperatorMode)EditorPrefs.GetInt(OperatorModeKey, (int)OperatorMode.UGUI);
             _DistributionOrder = (DistributionOrder)EditorPrefs.GetInt(DistributionOrderKey, (int)DistributionOrder.Position);
         }
@@ -95,6 +98,21 @@ namespace litefeel.AlignTools
                 {
                     _RulerLineColor = value;
                     EditorPrefs.SetString(RulerLineColorKey, "#" + ColorUtility.ToHtmlStringRGBA(value));
+                }
+            }
+        }
+
+        private static int _RulerLineWidth;
+        public static int RulerLineWidth
+        {
+            get { return _RulerLineWidth; }
+            set
+            {
+                value = Mathf.Clamp(value, 1, int.MaxValue);
+                if (value != _RulerLineWidth)
+                {
+                    _RulerLineWidth = value;
+                    EditorPrefs.SetInt(RulerLineWidthKey, value);
                 }
             }
         }

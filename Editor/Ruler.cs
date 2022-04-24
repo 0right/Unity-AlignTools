@@ -17,6 +17,13 @@ namespace litefeel.AlignTools
         private Vector2 size;
         const float RULER_SIZE = 20;
         private int _myControlId = 0;
+        private int LINE_WIDTH
+        {
+            get
+            {
+                return Settings.RulerLineWidth;
+            }
+        }
         private int MyControlId
         {
             get
@@ -33,6 +40,10 @@ namespace litefeel.AlignTools
         private Line dragingLine;
         private List<Line> lines = new List<Line>();
 
+        public void ClearAllRulers()
+        {
+            lines.Clear();
+        }
 
         internal void OnSceneGUI(SceneView sceneView)
         {
@@ -135,7 +146,7 @@ namespace litefeel.AlignTools
 
 
             Handles.color = color;
-            Handles.DrawLine(p1, p2);
+            Handles.DrawLine(p1, p2, LINE_WIDTH);
         }
 
         private bool IsPointOnRulerArea(Vector2 uiPos)
