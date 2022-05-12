@@ -22,8 +22,9 @@ namespace litefeel.AlignTools
         {
             if(lastSelectedArr == null)
                 lastSelectedArr = new Transform[] { };
-            var newSelected = Selection.transforms.Except(lastSelectedArr).ToList();
-            lastSelectedArr = Selection.transforms;
+            var currSelectedTrans = Utils.GetTransforms();
+            var newSelected = currSelectedTrans.Except(lastSelectedArr).ToList();
+            lastSelectedArr = currSelectedTrans;
             if (newSelected == null || newSelected.Count() == 0)
                 return;
             lastSelectedTrans = newSelected.First();

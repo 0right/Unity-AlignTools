@@ -18,12 +18,12 @@ namespace litefeel.AlignTools
 
         internal static Transform[] GetTransforms()
         {
-            return Selection.transforms;
+            return Selection.gameObjects.Select(x=>x.transform).ToArray();
         }
 
         internal static List<RectTransform> GetRectTransforms()
         {
-            var arr = Selection.transforms;
+            var arr = GetTransforms();
             var list = new List<RectTransform>();
             foreach (var trans in arr)
             {
@@ -36,7 +36,7 @@ namespace litefeel.AlignTools
 
         internal static List<Transform> GetWorldTransforms()
         {
-            var arr = Selection.transforms;
+            var arr = GetTransforms();
             var list = new List<Transform>();
             foreach (var trans in arr)
             {
@@ -49,7 +49,7 @@ namespace litefeel.AlignTools
 
         public static List<UIWidget> GetNGUIWidgets()
         {
-            var arr = Selection.transforms;
+            var arr = Selection.gameObjects;
             var list = new List<UIWidget>();
             foreach (var trans in arr)
             {
